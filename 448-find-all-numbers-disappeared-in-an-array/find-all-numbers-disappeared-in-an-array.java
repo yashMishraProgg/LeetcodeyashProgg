@@ -1,22 +1,31 @@
 class Solution {
     public List<Integer> findDisappearedNumbers(int[] nums) {
-            System.gc();
-        List<Integer> result = new ArrayList<>();
-
-
-        Set<Integer> hashSet = new HashSet<>();
-
-        for (int i : nums) {
-            hashSet.add(i);
+        int i  = 0;
+        while(i<nums.length){
+        int correct = nums[i]-1;
+        if(nums[i]!= nums[correct]){
+           swap(nums,i,correct);
+        }else{
+            i++;
         }
-
-        for (int i = 1; i <= nums.length; i++) {
-            if (!hashSet.contains(i)) {
-                result.add(i);
-            }
+    }
+    //Case 1
+    //Find the first index
+    List<Integer>ans =  new ArrayList<>();
+    for(int index = 0; index<nums.length;index++){
+        if(nums[index]!=index+1){
+           ans.add(index+1);
         }
+    }
+    //Case 2
+    return ans;
+ }
 
-
-        return result;
+ 
+    
+    public static void swap(int nums[],int first,int second){
+        int temp = nums[first];
+        nums[first] = nums[second];
+        nums[second] = temp;
     }
 }
