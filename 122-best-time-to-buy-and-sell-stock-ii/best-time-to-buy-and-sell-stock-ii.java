@@ -8,6 +8,7 @@ class Solution {
                 maxProfit += prices[i] - prices[i - 1];
             }
         }
+        System.gc();
         return maxProfit; 
     }
 }
