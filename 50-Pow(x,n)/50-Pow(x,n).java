@@ -1,4 +1,4 @@
-// Last updated: 8/6/2025, 7:58:49 PM
+// Last updated: 8/6/2025, 8:08:53 PM
 class Solution {
     public double myPow(double x, int n) {
         long power = n; 
