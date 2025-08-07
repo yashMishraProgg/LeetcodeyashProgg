@@ -1,50 +1,61 @@
 class Solution {
+    private int ans = 0;
+
     public int reversePairs(int[] nums) {
-        return mergeSort(nums, 0, nums.length - 1);
+        mergeSort(nums, 0, nums.length - 1);
+        return ans;
     }
 
-    private int mergeSort(int[] nums, int low, int high) {
-        if (low >= high) return 0;
+    private void merge(int[] arr, int l, int m, int r) {
+        int lftsize = m - l + 1;
+        int rgtsize = r - m;
+        int[] left = new int[lftsize];
+        int[] right = new int[rgtsize];
 
-        int mid = (low + high) / 2;
-        int count = mergeSort(nums, low, mid) + mergeSort(nums, mid + 1, high);
+        // Copy contents to temp arrays
+        for (int i = 0; i < lftsize; i++) {
+            left[i] = arr[l + i];
+        }
+        for (int i = 0; i < rgtsize; i++) {
+            right[i] = arr[m + 1 + i];
+        }
 
-        // Count how many elements in right half form a reverse pair with elements in left
-        int j = mid + 1;
-        for (int i = low; i <= mid; i++) {
-            while (j <= high && (long) nums[i] > 2L * nums[j]) {
+        // Count reverse pairs
+        int i = 0, j = 0;
+        int count = 0;
+        while (i < lftsize) {
+            while (j < rgtsize && (long) left[i] > 2L * right[j]) {
                 j++;
             }
-            count += (j - (mid + 1));
+            count += j;
+            i++;
         }
+        ans += count;
 
-        // Merge the sorted halves
-        merge(nums, low, mid, high);
-        return count;
-    }
-
-    private void merge(int[] nums, int low, int mid, int high) {
-        int[] temp = new int[high - low + 1];
-        int i = low, j = mid + 1, k = 0;
-
-        // Merge two sorted parts into temp array
-        while (i <= mid && j <= high) {
-            if (nums[i] <= nums[j]) {
-                temp[k++] = nums[i++];
+        // Merge step to sort
+        i = 0; j = 0;
+        int k = l;
+        while (i < lftsize && j < rgtsize) {
+            if (left[i] <= right[j]) {
+                arr[k++] = left[i++];
             } else {
-                temp[k++] = nums[j++];
+                arr[k++] = right[j++];
             }
         }
-
-        while (i <= mid) {
-            temp[k++] = nums[i++];
+        while (i < lftsize) {
+            arr[k++] = left[i++];
         }
-
-        while (j <= high) {
-            temp[k++] = nums[j++];
+        while (j < rgtsize) {
+            arr[k++] = right[j++];
         }
+    }
 
-        // Copy back to original array
-        System.arraycopy(temp, 0, nums, low, temp.length);
+    private void mergeSort(int[] arr, int l, int r) {
+        if (l < r) {
+            int m = l + (r - l) / 2;
+            mergeSort(arr, l, m);
+            mergeSort(arr, m + 1, r);
+            merge(arr, l, m, r);
+        }
     }
 }
