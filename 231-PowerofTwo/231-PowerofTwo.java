@@ -1,4 +1,4 @@
-// Last updated: 8/13/2025, 5:34:30 PM
+// Last updated: 8/13/2025, 5:34:40 PM
 class Solution {
     public boolean isPowerOfTwo(int n) {
         return n > 0 && (n & (n - 1)) == 0; //any n&(n-1) always be a power of 2
