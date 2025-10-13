@@ -29,13 +29,13 @@ class Solution {
             // we know that levelsize == queuesize
             int levelSize = queue.size();
 
-            TreeNode rightMostNode = null;
-
             for(int i =0;i < levelSize ;i++){
                 
                 TreeNode currentNode = queue.poll(); //remove from queue (root first)
-
-               rightMostNode = currentNode;
+                //only add last one
+                if(i  == levelSize - 1){
+                    result.add(currentNode.val);
+                }
 
                 if(currentNode.left != null){
                     queue.offer(currentNode.left);   //add in queue
@@ -46,7 +46,6 @@ class Solution {
                 }
 
             }
-            result.add(rightMostNode.val);
         }
          return result;
     }
