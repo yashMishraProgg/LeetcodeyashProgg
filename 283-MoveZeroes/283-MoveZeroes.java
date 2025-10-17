@@ -1,15 +1,19 @@
-// Last updated: 8/5/2025, 7:45:32 PM
+// Last updated: 10/17/2025, 11:56:10 PM
 class Solution {
-    public void moveZeroes(int[] nums) {
-        int n = nums.length;
-        int count=0;
-        for(int i=0;i<n;i++){
-            if(nums[i]!=0){
-                int temp = nums[i];
-                nums[i] = nums[count];
-                nums[count] = temp;
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int count = 0;
+        int max = Integer.MIN_VALUE;
+
+        for(int i =0;i<nums.length; i++){
+            if(nums[i] == 1){
                 count++;
+            }else{
+                max = Math.max(max, count); //current consecutive max count of 1 before  0 occured
+                //reset the count if encounter 0
+                count =0;
             }
         }
+        max = Math.max(max,count); //compare the old max with new count
+        return max;
     }
 }
