@@ -1,17 +1,53 @@
-// Last updated: 10/28/2025, 11:14:29 PM
+// Last updated: 10/29/2025, 10:23:29 PM
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
 class Solution {
-    public int thirdMax(int[] nums) {
-        //sort the array
-        Arrays.sort(nums);
-        int n = nums.length, cnt = 1;
+    public boolean isBalanced(TreeNode root) {
+        //so basically a balanced tree => height(left) - height(right) <=1
 
-        for (int i = n - 1; i >= 1; i--) {
-            if (nums[i] != nums[i - 1]) 
-                cnt++;
-            if (cnt == 3)
-                return nums[i - 1];
+        if(root == null){
+            return true;
         }
 
-        return nums[n - 1];
+        return height(root) != -1;
+    }
+
+    public int height(TreeNode node){
+        if(node == null){
+            return 0;
+        }
+
+        int leftTree = height(node.left);
+
+        if(leftTree == -1){
+            return -1;
+        }        
+        
+        int rightTree = height(node.right);
+
+         if(rightTree == -1){
+           return -1;
+        }   
+
+        if(leftTree - rightTree < -1 || leftTree - rightTree > 1){
+            return -1;
+        }
+
+        //calculate height
+        return Math.max(leftTree, rightTree)  + 1;
+        
     }
 }
