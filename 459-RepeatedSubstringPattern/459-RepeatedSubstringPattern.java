@@ -1,4 +1,4 @@
-// Last updated: 11/13/2025, 10:13:18 PM
+// Last updated: 11/13/2025, 10:13:32 PM
 class Solution {
     public boolean repeatedSubstringPattern(String s) {
        
