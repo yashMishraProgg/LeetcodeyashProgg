@@ -1,4 +1,4 @@
-// Last updated: 11/30/2025, 11:56:45 PM
+// Last updated: 11/30/2025, 11:58:20 PM
 1class Solution {
 2    public int minSubarray(int[] nums, int p) {
 3        int n = nums.length;
