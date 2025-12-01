@@ -10,6 +10,7 @@ class Solution {
                     row.add(1); // First and last elements are always 1
                 } else {
                     // Sum of two elements from previous row
+                    //        samerow(upper)leftcol   + samerowsamecol
                     int val = result.get(i - 1).get(j - 1) + result.get(i - 1).get(j);
                     row.add(val);
                 }
