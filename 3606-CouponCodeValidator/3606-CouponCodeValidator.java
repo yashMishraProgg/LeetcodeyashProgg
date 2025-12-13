@@ -1,4 +1,4 @@
-// Last updated: 12/13/2025, 11:41:09 PM
+// Last updated: 12/13/2025, 11:42:13 PM
 1class Solution {
 2    public List<String> validateCoupons(String[] code, String[] businessLine, boolean[] isActive) {
 3        
